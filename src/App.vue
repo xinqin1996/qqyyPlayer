@@ -1,29 +1,48 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <!-- 主体 -->
+    <my-header></my-header>
+    <!-- <keep-alive>
+      <router-view class="router-view"/>      
+    </keep-alive> -->
+    <!-- router-view 的 class 会和组件合并在一起 -->
+    <router-view class="router-view"></router-view>
+    <!-- 更新说明 -->
+    <!-- <my-dialog></my-dialog> -->
+    <audio src=""></audio>
   </div>
 </template>
 
+<script>
+import myHeader from './components/my-header/my-header.vue';
+export default {
+  data(){
+    return{
+
+    }
+  },
+  components:{
+    myHeader,
+  }
+}
+</script>
+
 <style lang="less">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  // text-align: center;
+  // 定义的全局样式有效
+  color: @text_color;          //定义全局字体颜色
+  font-size:@font_size_medium; //定义全局字体大小
+  position:relative;
+  width:100%;
+  height:100%;
+
+  .router-view{
+    width:100%;
+    height:100%;
+  }
+  audio {
+    position:fixed;
   }
 }
 </style>

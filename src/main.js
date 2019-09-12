@@ -8,7 +8,8 @@ import fastclick from "fastclick"
 import VueLazyload from "vue-lazyload"
 import { VERSION } from "./config" //从config导入版本号
 
-// import "@/styles/index.less" //使用了@代表src
+// 在main.js里导入样式index.html的基础样式
+import "@/styles/index.less" //使用了@代表src
 
 // 导入 fastclick.js 优化移动端300ms点击延迟
 fastclick.attach(document.body)
@@ -16,10 +17,10 @@ fastclick.attach(document.body)
 // 弹出层组件 导入TempToast模块
 // Vue.use()详解 
 // https://www.jianshu.com/p/89a05706917a 
-Vue.use(mmToast)
+// Vue.use(mmToast)
 
-// icon组件
-Vue.component(Icon.name,Icon);
+// icon组件 
+// Vue.component(Icon.name,Icon);
 
 // 懒加载 
 // 使用来绑定图片： <img v-lazy="图片地址" :key="图片地址">
@@ -36,7 +37,7 @@ Vue.use(VueLazyload,{
 window._hmt && window._hmt.push(['_setCustomVar', 1 ,'version', VERSION, 1])
 
 // 路由监控
-// 定义title不改变的路由
+// 定义title不改变的路由 
 const redirectList = ['/music/details','/music/comment']
 router.beforeEach((to, from, next) => {
   // 1 监控路由跳转，把fullPath拼接进window._hmt
@@ -52,21 +53,19 @@ router.beforeEach((to, from, next) => {
 })
 
 // 版权信息
-window.qqyyPlayer = window.qqyyPlayer = `欢迎来到qqyyPlayer!
+window.qqyyPlayer = window.qqyyplayer = `欢迎来到qqyyPlayer!
 当前版本为：V${VERSION}
 作者：昕昕
+Github：https://github.com/xinqin1996/qqyyPlayer
+歌曲来源于网易云音乐 (http://music.163.com)`
 
-`
+console.info(`%c${window.qqyyplayer}`,'color:blue')
 
-
-
-
-
-
+//它会阻止你显示生产模式的消息
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App) 
 }).$mount('#app')

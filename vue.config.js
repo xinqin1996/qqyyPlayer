@@ -11,12 +11,12 @@
 // https://www.cnblogs.com/raind/p/10219708.html
 const path = require('path')
 
-//1-2 路径别名设置  （获取绝对路径）
+//1-2 路径别名设置  （获取绝对路径） resolve()
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-//3-1 区别生产模式和开发模式
+//3-1 区别生产模式和开发模式  设置模式为生产者模式
 const isEnvProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
@@ -30,7 +30,9 @@ module.exports = {
       .set('base', resolve('src/base'))
       .set('components', resolve('src/components'))
       .set('pages', resolve('src/pages'))
-    //3 对htmlWebpackPlugin配置 ，返回args
+    //3-2 对htmlWebpackPlugin配置 ，返回args
+    // html页面注入环境变量
+    // 打包是压缩js/css
     config.plugin('html').tap(args => {
       if (isEnvProduction) {
         args[0].minify.minifyJS = true
@@ -40,13 +42,14 @@ module.exports = {
       return args
     })
   },
-  //3 VUE-CLI3全局引入less的变量
-  // https://blog.csdn.net/qq_38850058/article/details/82893736
+  //4 VUE-CLI3全局引入less的变量
+  // 需要安装以下模块
+  // https://blog.csdn.net/weixin_41786576/article/details/83745702
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'less',
-      patterns: [
-        resolve('src/styles/var.less'),
+      patterns: [ // 需要预处理的less文件
+        resolve('src/styles/var.less'),  
         resolve('src/styles/mixin.less')
       ]
     }

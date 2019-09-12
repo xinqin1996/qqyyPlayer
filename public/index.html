@@ -1,16 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>qqyy</title>
+    <title>qqyyPlayer在线播放器</title>
+    <meta name="keywords" content="qqyyPlayer,播放器,在线音乐,在线播放器,音乐播放器,在线音乐播放器,qqyyPlayer 在线音乐播放器">
+    <meta name="description" content="qqyyPlayer在线播放器">
+    <link rel="stylesheet" href="/css/css_reset.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <!-- 单独引入加载进入时动画css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/velocity.min.js"></script>
+    <style>
+      #appLoading {
+        display:none;
+        animation :removeAnimate 0.3s 0.5s 1;
+        animation-fill-mode:both;
+      }
+      @keyframes removeAnimate{
+        from{opacity:1} 
+        to {opacity:0}
+      }
+    </style>
+    <script>
+      // 判断浏览器是否为IE浏览器，是的话跳转到提示页
+      https://blog.csdn.net/u011020012/article/details/51209443
+      (function() {
+        if (!!window.ActiveXObject || 'ActiveXObject' in window) {
+          window.location = 'http://music.mtnhao.com/tips.html'
+          return false
+        }
+      })()
+    </script>
+    <!-- https://www.cnblogs.com/mengff/p/9815333.html -->
+    <!--如果为生产者模式，添加百度统计 -->
+    <!-- https://blog.csdn.net/u010125836/article/details/79907802 -->
+    <% if(htmlWebpackPlugin.options.NODE_ENV === 'production'){ %>
+    <script>
+      var _hmt = _hmt || []
+      window._hmt = _hmt;
+      (function() {
+        var hm = document.createElement('script')
+        hm.src = 'https://hm.baidu.com/hm.js?71e62b6d09afa9deac7bfa5c60ad06dd'
+        var s = document.getElementsByTagName('script')[0]
+        s.parentNode.insertBefore(hm, s)
+      })();
+    </script>
+    <% } %>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but qqyy doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong> 为了更好的体验请开启 script </strong>
     </noscript>
+    <!-- 加载动画 -->
+    <div id="appLoading">
+      <div class="night">
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+      </div>
+    </div>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
