@@ -2,11 +2,18 @@
   <div id="music">
     <!-- 内容 -->
     <div class="music-content">
+      <!-- 内容左侧 -->
       <div class="music-left">
-        <router-view class="music-list">
-
-        </router-view>
+        <!-- -------1: music-btn组件引入------- -->
+        <music-btn></music-btn>
+        <!-- <music-button></music-button> -->
+        <!-- -------2: 子路由导入引入------- -->
+        <keep-alive>
+          <router-view class="music-list" v-if="$route.meta.keepAlive"/>
+        </keep-alive>        
+        <router-view class="music-list" v-if="!$route.meta.keepAlive"/>
       </div>
+      <!-- 内容右侧 -->
       <div class="music-right"></div>
     </div>
     <!-- 播放器 -->
@@ -17,14 +24,24 @@
     <div class="qqyyPlayer-mask"></div>
   </div>
 </template>
+
 <script>
+import musicBtn from "components/musicBtn/musicBtn.vue";
+
+
+
 export default {
   data(){
     return {
+
     }
+  },
+  components:{
+    musicBtn
   }
 }
 </script>
+
 <style lang="less">
   #music{
     padding:75px 25px 25px 25px;
@@ -42,6 +59,7 @@ export default {
       .music-left{
         border:1px solid red;
         flex:1;
+        transition:0.7s;  // 加点过渡
         .music-list{
           border:1px solid red;
           height:calc(~"100% - 60px")
@@ -63,7 +81,7 @@ export default {
     // 适应父元素的100%
     .qqyyPlayer-mask,
     .qqyyPlayer-bg{
-    position: absolute;
+    position: absolute;   // 设置 100% 宽高
     top: 0;
     right: 0;
     left: 0;

@@ -70,7 +70,7 @@ export default {
     },
     appendToBody:{
       type:Boolean,
-      defaule:true
+      default:true
     }
   },
   data(){
@@ -80,8 +80,10 @@ export default {
     }
   },
   // 监听 将元素挂载到body下面
+  /** ------------将弹框元素挂载到dom树最下面，以增加回流速度--------------- */ 
+  // https://segmentfault.com/q/1010000013551201
   watch: {
-    dialogShow(val){
+    dialogShow(val){   // watch 传入新值
       if(val && this.appendToBody){
         document.body.appendChild(this.$el)
       }
@@ -96,7 +98,7 @@ export default {
       document.body.appendChild(this.$el)
     }
   },
-  // 组件销毁时
+  // 组件销毁时 必须删除动态添加到body下的子元素
   destroyed() {
     console.log("my-dialog组件被销毁")
     if (this.appendToBody && this.$el && this.$el.parentNode) {
@@ -135,7 +137,7 @@ export default {
   }
 }
 </script>
-<style lang="less">
+<style lang="less" scope>
   @my-dialog:my-dialog;
 
   // -----------绑定动画-----------可以嵌套

@@ -7,7 +7,7 @@
     <dl class="user">
       <template v-if="user.userId">
         <router-link class="user-info" to="/" tag="dt">
-          <img class="avatar" :src="user.avatarUrl" alt="">
+          <img class="avatar" :src="`${user.avatarUrl}?param=50y50`" alt="">
           <span>{{user.nickname}}</span>
         </router-link>
         <dd class="user-btn" @click="out">退出</dd>
@@ -23,6 +23,9 @@
       cancel-btn-text="关闭" 
       @confirm="login"
     >
+      <!-- 重点：--------关于slot的样式问题，一定要以插入div的样式为开头，因为数据
+      和方法在这里定义，但是样式受到插入后的位置的影响，正常情况下是没问题的，当对子组件的位置
+      进行移动时，比如document.body.appendChild($el)-------- -->
       <div class="my-dialog-text">
         <!-- v-model修饰符 -->
         <!-- https://www.cnblogs.com/yysbolg/p/9876276.html -->
@@ -66,8 +69,8 @@
 
 <script>
 import { getUserPlaylist } from "api";
-import myDialog from "base/my-dialog/my-dialog";
-import {mapActions} from "vuex" // 导入mapActions
+import myDialog from "base/myDialog/myDialog";
+import {mapActions} from "vuex"; // 导入mapActions
 
 
 export default {
@@ -113,8 +116,8 @@ export default {
     // axios请求
     _getUserPlaylist(uid){
       getUserPlaylist(uid).then(res=>{
-        console.log(res);
         this.user=res.playlist[0].creator;
+        alert('欢迎  '+this.user.nickname)
       }).catch(e=>{
         alert(e)
       })
@@ -193,28 +196,29 @@ export default {
       }
     }
   }
-  #my-header{
-    .my-dialog-text{
-      .my-dialog-input{
-        width:100%;
-        height:40px;
-        box-sizing: border-box;
-        padding:0 15px;
-        background-color:transparent;
-        outline:none;
-        border:1px solid @input_border_color;
-        color:@text_color_active;
-        font-size:@font_size_medium;
-        box-shadow: 0 0 4px 0px #FFF inset;
-        // input placeholder颜色设置
-        &::placeholder{
-          color:@text_color;
-        }
+  .my-dialog-text{
+    .my-dialog-input{
+      width:100%;
+      height:40px;
+      box-sizing: border-box;
+      padding:0 15px;
+      background-color:transparent;
+      outline:none;
+      border:1px solid @input_border_color;
+      color:@text_color_active;
+      font-size:@font_size_medium;
+      box-shadow: 0 0 4px 0px #FFF inset;
+      // input placeholder颜色设置
+      &::placeholder{
+        color:@text_color;
       }
-      a:hover{
-        color:@a_hover_color;
-      }      
     }
+    a{
+      color:@a_default_color !important;
+      &:hover{
+        color:@a_hover_color !important;
+      }
+    }   
   }
 </style>
 
