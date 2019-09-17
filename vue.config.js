@@ -30,6 +30,7 @@ module.exports = {
       .set('base', resolve('src/base'))
       .set('components', resolve('src/components'))
       .set('pages', resolve('src/pages'))
+      .set('utils', resolve('src/utils'))
     //3-2 对htmlWebpackPlugin配置 ，返回args
     // html页面注入环境变量
     // 打包是压缩js/css

@@ -47,14 +47,6 @@
   content: "";
 }
 
-/* 清除input type-number的默认样式 */
-.clear_input_number::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-.clear_input_number::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-}
-
 .add-tb::before{
   display: table;
   content:"";

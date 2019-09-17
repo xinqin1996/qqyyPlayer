@@ -12,7 +12,7 @@ import { URL } from "@/config";
 
 axios.defaults.baseURL = URL;
 
-// 获取用户歌单，同时可以获取用户的简单信息
+// 1：用户歌单--同时可以获取用户的简单信息
 export function getUserPlaylist(uid){
   return new Promise(
     function(resolve,reject){
@@ -25,6 +25,23 @@ export function getUserPlaylist(uid){
           }else{
             resolve(res.data)            
           }
+        }
+      })
+    }
+  )
+}
+
+// 2：获取特定排行榜--展示在正在播放页面
+export function getToplist(idx){
+  return new Promise(
+    function(resolve,reject){
+      var url="/top/list";
+      var obj={idx};
+      axios.get(url,{params:obj}).then(res=>{
+        if(res.data.code === 200){
+          resolve(res.data)
+        }else{
+          reject("没有获取到top榜单列表")
         }
       })
     }

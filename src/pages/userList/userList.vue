@@ -2,7 +2,7 @@
   <div>
     <template v-if="list.length>0">
     </template>
-    <my-no-result text="弄啥子呢！！！"></my-no-result>
+    <my-no-result v-else text="弄啥子呢！！！"></my-no-result>
   </div>
 </template>
 <script>

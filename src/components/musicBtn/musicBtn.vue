@@ -2,9 +2,9 @@
   <div id="music-btns">
     <router-link to="/music/playlist" tag="span">正在播放</router-link>
     <router-link to="/music/userlist" tag="span">推荐</router-link>
-    <router-link to="/music/userlist" tag="span">搜索</router-link>
-    <router-link to="/music/userlist" tag="span">我的歌单</router-link>
-    <router-link to="/music/playlist" tag="span">我听过的</router-link>
+    <router-link to="/music" tag="span">搜索</router-link>
+    <router-link to="/music" tag="span">我的歌单</router-link>
+    <router-link to="/music" tag="span">我听过的</router-link>
   </div>
 </template>
 
@@ -12,8 +12,11 @@
 export default {
   data(){
     return{
-
+      
     }
+  },
+  created(){
+
   }
 }
 </script>
@@ -56,6 +59,7 @@ export default {
       }
       @media (max-width:500px){
         width:18.5%;
+        margin-right:0px;
         font-size:@font_size_small;
       }
     }

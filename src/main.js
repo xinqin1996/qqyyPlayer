@@ -8,10 +8,12 @@ import fastclick from "fastclick"
 import VueLazyload from "vue-lazyload"
 import { VERSION } from "./config" //从config导入版本号
 
+
 // 在main.js里导入样式index.html的基础样式
 import "@/styles/index.less" //使用了@代表src
 
 // 导入 fastclick.js 优化移动端300ms点击延迟
+// 移动端的双击会缩放导致click判断延迟 fastclick解决这个问题
 fastclick.attach(document.body)
 
 // 弹出层组件 导入TempToast模块
@@ -21,6 +23,9 @@ fastclick.attach(document.body)
 
 // icon组件 
 // Vue.component(Icon.name,Icon);
+
+// 将字体图标引入到当前项目中,引入第三方的iconfont.css
+import  './font/font_lzp60xnfis8/iconfont.css'
 
 // 懒加载 
 // 使用来绑定图片： <img v-lazy="图片地址" :key="图片地址">

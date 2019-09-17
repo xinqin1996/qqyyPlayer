@@ -33,7 +33,7 @@ const routes=[
     path:'/home',
     component: ()=>import('./views/Home.vue'),
     meta: {
-      title: 'music',
+      title: 'home',
       // keepAlive: false,
     } 
   },
