@@ -105,7 +105,7 @@ export default {
     // 在鼠标点击和回车时发起请求，关闭组件
     login(){
       if(this.uidValue===""){
-        alert("UID 不能为空");
+        this.$myToast("UID 不能为空");
         this.openDialog(0);
         return;
       }
@@ -117,15 +117,15 @@ export default {
     _getUserPlaylist(uid){
       getUserPlaylist(uid).then(res=>{
         this.user=res.playlist[0].creator;
-        alert('欢迎  '+this.user.nickname)
+        this.$myToast('欢迎  '+this.user.nickname)
       }).catch(e=>{
-        alert(e)
+        console.log(e)
       })
     },
     // 退出登录
     out(){
       this.user={};
-      alert("退出登录")
+      this.$myToast("退出登录")
     },
     // actions映射
     // https://blog.csdn.net/zdj5495/article/details/84871050

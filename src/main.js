@@ -3,8 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import fastclick from "fastclick"
-// import mmToast from "base/mm-toast" //自动引入index.js文件
-// import Icon from "base/mm-icon/mm-icon"
+import myToast from "base/myToast" //自动引入index.js文件
+import myIcon from "base/myIcon/myIcon"
 import VueLazyload from "vue-lazyload"
 import { VERSION } from "./config" //从config导入版本号
 
@@ -19,10 +19,10 @@ fastclick.attach(document.body)
 // 弹出层组件 导入TempToast模块
 // Vue.use()详解 
 // https://www.jianshu.com/p/89a05706917a 
-// Vue.use(mmToast)
+Vue.use(myToast)
 
 // icon组件 
-// Vue.component(Icon.name,Icon);
+Vue.component(myIcon.name,myIcon);
 
 // 将字体图标引入到当前项目中,引入第三方的iconfont.css
 import  './font/font_lzp60xnfis8/iconfont.css'

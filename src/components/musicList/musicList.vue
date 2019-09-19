@@ -68,7 +68,7 @@
   </div>
 </template>
 <script>
-import myIcon from "base/myIcon/myIcon";
+// import myIcon from "base/myIcon/myIcon";
 import { formatDuration } from "utils/filter";
 import { mapGetters, mapMutations } from 'vuex';
 import { setTimeout, setInterval } from 'timers';
@@ -77,7 +77,7 @@ import myNoResult from "base/myNoResult/myNoResult";
 export default { 
   name:'musicList',
   components:{
-    myIcon,
+    // myIcon,
     myNoResult
   },
   filters:{
@@ -129,6 +129,7 @@ export default {
   },
 
   activated(){
+    // this.$myToast("nihao")
     this.scrollTop && (this.$refs.listContent.scrollTop = this.scrollTop)
   },
 

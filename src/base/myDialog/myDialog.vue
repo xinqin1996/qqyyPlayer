@@ -140,10 +140,10 @@ export default {
 <style lang="less" scope>
   @my-dialog:my-dialog;
 
-  // -----------绑定动画-----------可以嵌套
-  .@{my-dialog}-fade-enter-active{
+  // -----------绑定动画 只需要写 -active 在动画里绑定开始和结束，在动画结束后才会真正删除元素-----------可以嵌套--------------
+  .@{my-dialog}-fade-enter-active{ // 整体由 opacity 0->1
     animation:my-dialog-show-in 0.3s;
-    .@{my-dialog}-content{
+    .@{my-dialog}-content{ // 内容跳动进入
       animation:my-dialog-bounce-in 0.3s;
     }
   }
@@ -243,7 +243,7 @@ export default {
       transform: scale(0)
     }
     50% {
-      transform: scale(1.2)
+      transform: scale(1.05)
     }
     100% {
       transform: scale(1)

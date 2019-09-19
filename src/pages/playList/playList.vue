@@ -25,10 +25,10 @@ export default {
   },
   computed:{
     // 获取playlist
-    ...mapGetters(['playlist']),
+    ...mapGetters(['playlist','currentIndex']),
   },
   methods:{
-    // 1:设置播放的下标
+    // 1:设置播放的下标 （当点击的不是正在播放的歌曲时：1都设置true,2改变下标）
     selectItem(item, index) {
       this.setPlaying(true); // 设置true
       this.setCurrentIndex(index); // 设置下标 
@@ -40,7 +40,7 @@ export default {
       setPlaying:"setPlaying",
       setCurrentIndex:"setCurrentIndex",
     }),
-
+ 
     // 2:删除playlist的一个music
     deleleItem(index){
       let list = this.playlist;
@@ -49,8 +49,8 @@ export default {
       // 该语法直接把数组中元素按照顺序输出
       list.splice(index,1);
       // 传入 删除后的list / index
-      this.removePlayListItem({ list,index })
-      alert("删除成功")
+      index === this.currentIndex ? this.$myToast("删除成功,自动播放下一首歌","center") :  this.$myToast("删除成功","center");
+      this.removePlayListItem({ list,index })      
     },
   },
   components:{

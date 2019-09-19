@@ -1,5 +1,6 @@
 <template>
   <div id="music">
+
     <!-- 内容 -->
     <div class="music-content">
       <!-- 内容左侧 -->
@@ -19,12 +20,53 @@
       >
       </my-lyric>
     </div>
+
     <!-- 播放器 -->
-    <div class="music-bar">
-      <audio controls src="https://music.163.com/song/media/outer/url?id=1369798757.mp3"></audio>
+    <div class="music-bar disable">
+      <!-- 1: 开关按钮组 -->
+      <div class="music-bar-btns">
+        <my-icon type="kaishi" :size="38"></my-icon>
+        <div class="music-bar-btn-center">
+          <my-icon type="kaishi" :size="24"></my-icon>          
+        </div>
+
+        <my-icon type="kaishi" :size="38"></my-icon>
+      </div>
+
+      <!-- 2： 进度条部分 -->
+      <div class="music-bar-music">
+        <div class="music-bar-music-info">
+          <div class="music-info-one" style="display:none">欢迎使用欢迎欢迎qqyyPlayer</div>
+          <div class="music-info-two">
+            歌曲名字让我们航程作伴
+            <span>时间</span>
+          </div>
+        </div>
+        <div class="music-bar-music-bar">
+          
+        </div>
+      </div>
+
+      <!-- 3:  切换播放模式 -->
+      <div class="music-bar-mode">
+        <my-icon type="kaishi" :size="30"></my-icon>
+      </div>
+      <!-- 4:  评论 -->
+      <div class="music-bar-comment">
+        <my-icon type="kaishi" :size="30"></my-icon>
+      </div>
+      <!-- 5:  音量控制 -->
+      <div class="music-bar-volume">
+        <my-icon type="kaishi" :size="30"></my-icon>
+        <div class=music-bar-volume-line></div>
+      </div>
+
+      <!-- <audio controls src="https://music.163.com/song/media/outer/url?id=1369798757.mp3"></audio> -->
     </div>
+
     <!-- 背景 -->
     <div class="qqyyPlayer-bg"></div>
+
     <!-- 遮罩 -->
     <div class="qqyyPlayer-mask"></div>
   </div>
@@ -35,19 +77,30 @@ import musicBtn from "components/musicBtn/musicBtn.vue";
 import myLyric from "components/myLyric/myLyric";
 
 export default {
+  name:'',
+  components:{
+    musicBtn,
+    myLyric
+  },
+  flters:{},
+  props:{},
   data(){
     return {
 
     }
   },
-  components:{
-    musicBtn,
-    myLyric
-  },
+  computed:{},
+  watch:{},
+  // activated:{},
+  methods:{},
+  created(){},
+  mounted(){},
+  // render(){}, // html模板
 }
 </script>
 
 <style lang="less">
+  // 主体样式 
   #music{
     padding:75px 25px 25px 25px;
     width:100%;
@@ -110,11 +163,110 @@ export default {
   
   // 播放器
   #music{
+    // 定义初始样式
     .music-bar{
       width:100%;
       height:80px;
       padding-bottom:15px;
+      display: flex;
+      align-items: center;
+      color:@text_color_active;
+      position:relative;
+      // >div{  border:1px solid red;  }
+      .music-bar-btns{
+        min-width:180px;
+        // height:40px;
+        display: flex;
+        justify-content: space-between;
+        align-items:center;
+        .music-bar-btn-center{
+          width:40px;
+          height:40px;
+          display: flex;
+          justify-content: center;
+          align-items:center;
+          border-radius:50%;
+          background-color:@control_bg_color;
+        }
+      }
+      .music-bar-music{
+        margin-left:40px;
+        width:0;
+        flex:1;
+        // 上部介绍
+        .music-bar-music-info{
+          font-size:@font_size_small;
+          line-height:15px;
+          padding-right:80px;
+          width:100%;
+          position:relative;
+          >div{ 
+            .no-wrap(); // 使歌曲名不换行
+          }
+          span{ // 时间定位
+            position:absolute;
+            top:0px;
+            right:5px;
+          }
+        }
+        // 下部进度条
+        .music-bar-music-bar{
+          height:12px;
+          width:100%;
+          border:1px solid red;
+        }
+      }
+      .music-bar-mode{
+        margin-left:20px;
+      }
+      .music-bar-comment{
+        margin-left:20px;
+      }
+      .music-bar-volume{
+        .flex-center();
+        margin-left:20px;
+        .music-bar-volume-line{
+          width:115px;
+          height: 5px;
+          border:1px solid red;
+          margin-left:6px;
+          @media (max-width: 767px) {
+            display: none;
+          }
+        }
+      }
+      // 屏幕小于520时重新布局 (使用绝对定位布局)
+      &{
+        @media (max-width: 520px) {
+          >div{
+            position:absolute; // 全部定位      
+          }
+          .music-bar-btns{
+            width:56%;
+            bottom:10px;
+            left:50%;
+            transform:translate(-50%);
+          }
+          .music-bar-music{
+            top:-10px;
+            width:100%;
+            margin:0px;
+          }
+          .music-bar-mode{
+            bottom:15px;
+            left:5px;
+            margin:0px;
+          }
+          .music-bar-comment{
+            bottom:15px;
+            right:5px;
+          }
+          .music-bar-volume{
+            display:none;
+          }
+        }      
+      }
+
     }
   }
 </style>
-

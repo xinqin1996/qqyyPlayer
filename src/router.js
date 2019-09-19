@@ -8,7 +8,7 @@ Vue.use(Router)
 /** ------------------------------------------- */
 /** 重点：关于多级子路由，
  * 
- * 可以的话不要在多级路由中，单独的时候parent路由导航
+ * 可以的话不要在多级路由中，单独的设置parent路由导航
  * 
  * 当parent / children 都设置了缓存时，数据会互相传输，不一样时，以children为准，parent会有独立的数据
  * 
@@ -92,6 +92,7 @@ const router = new Router({
   // 缓存保存
   // mode: 'history',     //history // hash    需要后台配置，否则存在问题
   // 在缓存状态下，页面返回将回到离开时的位置
+
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
@@ -102,6 +103,7 @@ const router = new Router({
       return { x: 0, y: to.meta.savedPosition || 0} 
     }
   }
+  
   //------------------注释------------------：
   // 位置确实记录上了(加缓存，返回不刷新页面)，也就是说，返回不触发created，所以有些页面需要返回触发的东西都写在activated里面
   //activated() 在进入页面时触发函数，在缓存下也触发

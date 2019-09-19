@@ -2,9 +2,9 @@
   <div id="app">
     <!-- 主体 -->
     <my-header></my-header>
-    <keep-alive>
+    <!-- <keep-alive> -->
       <router-view v-if="$route.meta.keepAlive" class="router-view"/>      
-    </keep-alive>
+    <!-- </keep-alive> -->
     <!-- router-view 的 class 会和组件合并在一起 -->
     <router-view v-if="!$route.meta.keepAlive" class="router-view"/>
     <!-- 更新说明 -->
