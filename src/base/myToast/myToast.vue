@@ -43,7 +43,7 @@ export default {
     line-height:20px;
     overflow: hidden;
     max-width:80%;
-    text-align: center;
+    text-align: center; 
     &&-center{
       top:50%;
       margin-top:-20px;

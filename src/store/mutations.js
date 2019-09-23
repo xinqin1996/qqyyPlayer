@@ -15,7 +15,12 @@ const mutations = {
   // 设置播放下标
   [types.setCurrentIndex](state,val){
     state.currentIndex = val;
-  } 
+  }, 
+  
+  // 设置audio元素
+  [types.setAudioEle](state,val) {
+    state.audioEle = val;
+  }
 }
 
 export default mutations;

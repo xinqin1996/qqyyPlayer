@@ -104,7 +104,7 @@ export default {
       bottom:0;
       overflow: hidden;
       // background-image 配合使用
-      // -webkit-mask-image属性详解 ( 透明色阻止div显示,映射最下面的背景，1显示 )
+      // -webkit-mask-image属性详解 ( 透明色0阻止div显示,映射最下面的背景，1显示div内容 )
       // https://segmentfault.com/a/1190000011838367
       -webkit-mask-image:linear-gradient(
         to top,

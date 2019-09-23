@@ -10,7 +10,9 @@
 export default {
   name:'',
   components:{},
-  flters:{},
+  filters:{
+    // formatD:formatDuration, 对象语法  名字：函数
+  },
   props:{},
   data(){
     return{}

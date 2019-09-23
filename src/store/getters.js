@@ -8,8 +8,11 @@ const getters = {
   // 当前音乐(通过下标获得音乐对象) 
   currentMusic:(state)=>{ // 如果不存在返回一个空的对象-1
     return state.playlist[state.currentIndex] || {}
-  }
-
+  },
+  // 获取audioEle
+  audioEle:(state)=>{  return state.audioEle  },
+  // 获取mode播放模式
+  mode:(state)=>{ return state.mode },
 }
 
 export default getters;

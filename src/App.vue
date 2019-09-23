@@ -9,13 +9,13 @@
     <router-view v-if="!$route.meta.keepAlive" class="router-view"/>
     <!-- 更新说明 -->
     <!-- <my-dialog></my-dialog> -->
-    <!-- <audio src=""></audio> -->
+    <audio controls ref="myPlayer"></audio>
   </div>
 </template>
 
 <script>
 import {getToplist} from "api";
-import { mapMutaions,mapActions } from "vuex";
+import { mapMutations,mapActions } from "vuex";
 import {defaultSheetId} from "@/config.js";
 import myHeader from 'components/myHeader/myHeader.vue';
 import { createTopList } from "utils/song";
@@ -38,6 +38,11 @@ export default {
       console.log(list[0]);
       this.setPlaylist(list);
     }).catch(e=>{console.log(e)});
+
+    // 设置audio元素 存放在vuex中
+    this.$nextTick(() => {
+      this.setAudioEle( this.$refs.myPlayer );
+    })
   },
 
   components:{
@@ -53,11 +58,12 @@ export default {
       })
       return arr;
     },
-  // ...mapMutaions({
-    
-  // })    
+
+    ...mapMutations({
+      setAudioEle: 'setAudioEle'
+    }),
     ...mapActions(["setPlaylist"])
-  },
+  }
 }
 </script>
 
@@ -79,6 +85,8 @@ export default {
   }
   audio {
     position:fixed;
+    bottom:0;
+    left:30%;
   }
 }
 </style>

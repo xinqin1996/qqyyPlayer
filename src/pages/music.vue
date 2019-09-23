@@ -1,3 +1,9 @@
+<!--
+audio的绑定src
+
+
+-->
+
 <template>
   <div id="music">
 
@@ -36,8 +42,8 @@
       <!-- 2： 进度条部分 -->
       <div class="music-bar-music">
         <div class="music-bar-music-info">
-          <div class="music-info-one" style="display:none">欢迎使用欢迎欢迎qqyyPlayer</div>
-          <div class="music-info-two">
+          <div style="display:none">欢迎使用欢迎欢迎qqyyPlayer</div>
+          <div>
             歌曲名字让我们航程作伴
             <span>时间</span>
           </div>
@@ -69,15 +75,23 @@
 
     <!-- 遮罩 -->
     <div class="qqyyPlayer-mask"></div>
+
+    <!-- less & 的应用 -->
+    <!-- <div class="fix">
+      123
+      <div class="fix-name">4567</div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import musicBtn from "components/musicBtn/musicBtn.vue";
 import myLyric from "components/myLyric/myLyric";
+import myPlayerMusic from "pages/myPlayer.js";
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
-  name:'',
+  name:'music',
   components:{
     musicBtn,
     myLyric
@@ -86,15 +100,56 @@ export default {
   props:{},
   data(){
     return {
-
+      currentProgress:0, // 当前缓存进度，以audio.buffered.end(0)的时间为准
+      musicReady:false, // 是否可以使用播放器
+      currentTime:0, // 当前播放时间
+      lyric:[], // 歌词
+      
     }
   },
-  computed:{},
-  watch:{},
+  computed:{
+    ...mapGetters([
+      "audioEle", // audio元素
+      'mode', // 播放模式
+      'currentMusic', // 当前播放的音乐 
+      'playing', // 是否正在播放
+    ])
+  },
+  watch:{
+    currentMusic(newMusic, oldMusic) {
+      console.log(newMusic)
+      //---------------该判断条件可能不用----------------
+      if (!newMusic.id) { // 首先进行判断 如果id不存在返回
+        this.lyric = []
+        return
+      }
+      this.audioEle.src = newMusic.url;
+      // 播放的歌曲改变时充值相关参数
+      this.currentProgress = this.currentTime = 0;
+      this.audioEle.play(); // 改变时播放
+    },
+    playing(newPlaying) {
+      const audio = this.audioEle;
+      this.$nextTick(() => {
+        newPlaying ? audio.play() : audio.pause();
+      })
+    }
+  },
   // activated:{},
-  methods:{},
-  created(){},
-  mounted(){},
+  methods:{
+    next(){
+      alert("播放下一首歌")
+    }
+  }, 
+  created(){
+    
+  },
+  mounted(){
+    // 初始化audio
+    this.$nextTick(() => {
+      myPlayerMusic.initAudio(this) // 传入当前vm实例对象
+    })
+  },
   // render(){}, // html模板
 }
 </script>
@@ -269,4 +324,19 @@ export default {
 
     }
   }
+
+  // #music{
+  //   .fix{
+  //     position:fixed;
+  //     top:0px;
+  //     z-index: 5000;
+  //     color:aquamarine;
+  //     &{
+  //       color:blue;
+  //     }
+  //     &-name{ // 转义为.fix-name, 不会形成嵌套
+  //       color:red;
+  //     }
+  //   }
+  // }
 </style>
