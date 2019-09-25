@@ -9,7 +9,7 @@
     <router-view v-if="!$route.meta.keepAlive" class="router-view"/>
     <!-- 更新说明 -->
     <!-- <my-dialog></my-dialog> -->
-    <audio controls ref="myPlayer"></audio>
+    <audio ref="myPlayer"></audio>
   </div>
 </template>
 

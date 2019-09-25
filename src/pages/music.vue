@@ -268,7 +268,7 @@ export default {
         .music-bar-music-bar{
           height:12px;
           width:100%;
-          border:1px solid red;
+          border:1px solid #eee;
         }
       }
       .music-bar-mode{
@@ -283,7 +283,7 @@ export default {
         .music-bar-volume-line{
           width:115px;
           height: 5px;
-          border:1px solid red;
+          border:1px solid #eee;
           margin-left:6px;
           @media (max-width: 767px) {
             display: none;
