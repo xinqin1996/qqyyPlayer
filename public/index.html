@@ -13,6 +13,17 @@
     <!-- 单独引入加载进入时动画css -->
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/velocity.min.js"></script>
+
+    <!-- <script type="text/javascript" src="https://appx/web-view.min.js"> -->
+   
+
+   <script type="text/javascript">
+    if (navigator.userAgent.indexOf('AlipayClient') > -1) {
+        document.writeln('<script src="https://appx/web-view.min.js"' + '>' + '<' + '/' + 'script>')
+    }
+</script>
+<script type="text/javascript" src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.1.5.1.js"></script>
+
     <style>
       #appLoading {
         display:none;

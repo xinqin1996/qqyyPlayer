@@ -14,7 +14,7 @@ const myPlayerMusic = {
     // console.log(that) // vm打印实例
     const ele = that.audioEle // 获取vm实例里的audio元素
 
-    // 1:音频正在缓冲事件(持续)
+    // 1:监听音频正在缓冲事件(持续)，只记录第一段缓冲时间，把缓存进度保存在music.vue的currentProgress里
     // 获得currentProgress 缓存的进度
     ele.onprogress = () => {
       try {
@@ -39,7 +39,7 @@ const myPlayerMusic = {
       }
     }
     
-    // 2:开始播放音乐（开始播放时发生）设置100ms的延迟
+    // 2:绑定 开始播放音乐事件（开始播放时发生）设置100ms的延迟，设置music.vue的musicReady=true
     // 开始播放音乐后100ms设置musicReady = true;
     ele.onplay = () => {
       let timer

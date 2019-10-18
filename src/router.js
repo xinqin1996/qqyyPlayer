@@ -60,7 +60,7 @@ const routes=[
         path: '/music/playlist',
         component: ()=>import('pages/playList/playList.vue'),
         meta: {
-          keepAlive: true,
+          keepAlive: false,
           title: '播放列表'
         } 
       },
@@ -68,7 +68,7 @@ const routes=[
         path: '/music/userlist',
         component: ()=>import('pages/userList/userList.vue'),
         meta: {
-          keepAlive: true,
+          keepAlive: false,
           title: '我的歌单'
         }
       }

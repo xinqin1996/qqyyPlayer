@@ -24,6 +24,18 @@ export default {
   created(){},
   mounted(){},
   // render(){}, // html模板
+
+
+  name:'',
+  props:{},
+  data(){
+    return{}
+  },
+  computed:{},
+  watch:{},
+  onload(){},
+  methods:{},
+  components:{},
 }
 </script>
 

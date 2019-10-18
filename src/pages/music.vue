@@ -49,7 +49,7 @@ audio的绑定src
           </div>
         </div>
         <div class="music-bar-music-bar">
-          
+          <my-progress></my-progress>
         </div>
       </div>
 
@@ -85,6 +85,7 @@ audio的绑定src
 </template>
 
 <script>
+import myProgress from "base/myProgress/myProgress";
 import musicBtn from "components/musicBtn/musicBtn.vue";
 import myLyric from "components/myLyric/myLyric";
 import myPlayerMusic from "pages/myPlayer.js";
@@ -94,12 +95,14 @@ export default {
   name:'music',
   components:{
     musicBtn,
-    myLyric
+    myLyric,
+    myProgress
   },
   flters:{},
   props:{},
   data(){
-    return {
+    return { 
+      // 这三个数据都是都myPlayer.js中的监听事件，动态获取到的
       currentProgress:0, // 当前缓存进度，以audio.buffered.end(0)的时间为准
       musicReady:false, // 是否可以使用播放器
       currentTime:0, // 当前播放时间
@@ -112,10 +115,11 @@ export default {
       "audioEle", // audio元素
       'mode', // 播放模式
       'currentMusic', // 当前播放的音乐 
-      'playing', // 是否正在播放
+      'playing', // 是否正在播放（播放状态）
     ])
   },
   watch:{
+    // 监听当前正在播放的歌曲（对象）
     currentMusic(newMusic, oldMusic) {
       console.log(newMusic)
       //---------------该判断条件可能不用----------------
@@ -128,6 +132,7 @@ export default {
       this.currentProgress = this.currentTime = 0;
       this.audioEle.play(); // 改变时播放
     },
+    // 监听播放状态
     playing(newPlaying) {
       const audio = this.audioEle;
       this.$nextTick(() => {
@@ -145,7 +150,7 @@ export default {
     
   },
   mounted(){
-    // 初始化audio
+    // 初始化audio（调用myPlayer.js中的播放器初始化函数）
     this.$nextTick(() => {
       myPlayerMusic.initAudio(this) // 传入当前vm实例对象
     })
@@ -268,7 +273,6 @@ export default {
         .music-bar-music-bar{
           height:12px;
           width:100%;
-          border:1px solid #eee;
         }
       }
       .music-bar-mode{

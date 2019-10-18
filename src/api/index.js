@@ -13,11 +13,11 @@ import { URL } from "@/config";
 axios.defaults.baseURL = URL;
 
 // 1：用户歌单--同时可以获取用户的简单信息
-export function getUserPlaylist(uid){
+export function getUserPlaylist(uid){ //~~~playList(uid,obj)
   return new Promise(
     function(resolve,reject){
-    var url="/user/playlist";   
-    var obj={uid}   
+    var url="/user/playlist";   // ~~~这里可以动态传入一个url
+    var obj={uid}               // ~~~这里应该直接传入一个对象
       axios.get(url,{params:obj}).then(res=>{
         if(res.data.code === 200){
           if(res.data.playlist.length == 0){

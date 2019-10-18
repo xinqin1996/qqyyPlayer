@@ -26,6 +26,8 @@
       <!-- 重点：--------关于slot的样式问题，一定要以插入div的样式为开头，因为数据
       和方法在这里定义，但是样式受到插入后的位置的影响，正常情况下是没问题的，当对子组件的位置
       进行移动时，比如document.body.appendChild($el)-------- -->
+      <!-- 包在div里是因为，这一整个div会以slot的形式插入到组件中，组件中的slot位置事先写了一个div用来
+      布局的，作为内容的容器，这个div要设置一样的class名字 -->
       <div class="my-dialog-text">
         <!-- v-model修饰符 -->
         <!-- https://www.cnblogs.com/yysbolg/p/9876276.html -->
