@@ -28,7 +28,7 @@ audio的绑定src
     </div>
 
     <!-- 播放器 -->
-    <div class="music-bar disable">
+    <div class="music-bar" :class="{disable: }">
       <!-- 1: 开关按钮组 -->
       <div class="music-bar-btns">
         <my-icon type="kaishi" :size="38"></my-icon>
@@ -49,7 +49,11 @@ audio的绑定src
           </div>
         </div>
         <div class="music-bar-music-bar">
-          <my-progress></my-progress>
+          <my-progress
+          @changePercent="changePercent"
+            :percent="percentMusic"
+            :percentProgress="currentProgress"
+          ></my-progress>
         </div>
       </div>
 
@@ -71,7 +75,7 @@ audio的绑定src
     </div>
 
     <!-- 背景 -->
-    <div class="qqyyPlayer-bg"></div>
+    <div class="qqyyPlayer-bg" :style="{'background-image':picUrl}"></div>
 
     <!-- 遮罩 -->
     <div class="qqyyPlayer-mask"></div>
@@ -90,6 +94,7 @@ import musicBtn from "components/musicBtn/musicBtn.vue";
 import myLyric from "components/myLyric/myLyric";
 import myPlayerMusic from "pages/myPlayer.js";
 import { mapMutations, mapGetters } from 'vuex';
+import { defaultBG } from '@/config';
 
 export default {
   name:'music',
@@ -103,7 +108,7 @@ export default {
   data(){
     return { 
       // 这三个数据都是都myPlayer.js中的监听事件，动态获取到的
-      currentProgress:0, // 当前缓存进度，以audio.buffered.end(0)的时间为准
+      currentProgress:0, // 当前缓存进度(%)，以audio.buffered.end(0)的时间为准
       musicReady:false, // 是否可以使用播放器
       currentTime:0, // 当前播放时间
       lyric:[], // 歌词
@@ -111,20 +116,37 @@ export default {
     }
   },
   computed:{
+		 // background-image:url("../assets/img/nidouzi.jpg");
+		 // 在css里以上面的形式
+		 // 图片路径 url(http://p1.music.126.net/Wcs2dbukFx3TUWkRuxVCpw==/3431575794705764.jpg)
+		 // 在style中以一整串string的形式来展示
+		 // var bg = require('../assets/img/nidouzi.jpg'); 本地路径使用require
+		picUrl() {
+			let _picUrl = this.currentMusic.id && this.currentMusic.image ?
+				`url(${this.currentMusic.image}?param=300y300)` :
+				`url(${defaultBG})`;
+				console.log("监听当前播放的歌曲图片：",_picUrl)
+				return _picUrl;
+		},
     ...mapGetters([
       "audioEle", // audio元素
       'mode', // 播放模式
       'currentMusic', // 当前播放的音乐 
       'playing', // 是否正在播放（播放状态）
-    ])
+    ]),
+    percentMusic() { // 播放进度
+      const duration = this.currentMusic.duration;
+      // 判断durtion是否undefined
+      return duration ? this.currentTime / duration : 0;
+    }
   },
   watch:{
     // 监听当前正在播放的歌曲（对象）
     currentMusic(newMusic, oldMusic) {
-      console.log(newMusic)
+      console.log("打印当前在播放的歌曲：",newMusic)
       //---------------该判断条件可能不用----------------
       if (!newMusic.id) { // 首先进行判断 如果id不存在返回
-        this.lyric = []
+        this.lyric = [] 
         return
       }
       this.audioEle.src = newMusic.url;
@@ -142,8 +164,15 @@ export default {
   },
   // activated:{},
   methods:{
+    // 1:播放下一首歌
     next(){
       alert("播放下一首歌")
+    },
+    // 2:改变播放进度 (直接修改audio dom元素的播放时间currentTime)
+    // 这个函数会在myProgress中调用
+    changePercent(percent) { // 传入一个百分比
+      let duration = this.currentMusic.duration;
+      this.audioEle.currentTime = duration * percent;
     }
   }, 
   created(){
@@ -211,7 +240,7 @@ export default {
     }
     .qqyyPlayer-bg{
       z-index:-2;
-      background-image:url("../assets/img/nidouzi.jpg");
+      // background-image:url("../assets/img/nidouzi.jpg");
       background-repeat:no-repeat;
       background-size:cover;
       filter:blur(1px);
@@ -232,6 +261,10 @@ export default {
       align-items: center;
       color:@text_color_active;
       position:relative;
+			&.disable{
+				pointer-events: none;
+				opacity: 0.6
+			}
       // >div{  border:1px solid red;  }
       .music-bar-btns{
         min-width:180px;

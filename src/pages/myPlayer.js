@@ -40,6 +40,7 @@ const myPlayerMusic = {
     }
     
     // 2:绑定 开始播放音乐事件（开始播放时发生）设置100ms的延迟，设置music.vue的musicReady=true
+    // 在歌曲开始播放时，设置可以使用播放器
     // 开始播放音乐后100ms设置musicReady = true;
     ele.onplay = () => {
       let timer
@@ -54,7 +55,7 @@ const myPlayerMusic = {
     // 绑定timeupdate 事件，在播放时不停运行，获取到currentTime并且保存起来
     ele.ontimeupdate = () => {
       that.currentTime = ele.currentTime
-      console.log(that.currentTime)
+      // console.log(that.currentTime)
     }
 
     // 当前音乐播放完毕

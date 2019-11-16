@@ -19,6 +19,7 @@ import { mapMutations,mapActions } from "vuex";
 import {defaultSheetId} from "@/config.js";
 import myHeader from 'components/myHeader/myHeader.vue';
 import { createTopList } from "utils/song";
+import {call} from "./store/text.js"
 
 
 /** --------在App.vue里面初始化数据--------- */
@@ -29,13 +30,14 @@ export default {
     }
   },
   created(){
+    call();
     // 获取正在播放列表
     getToplist(defaultSheetId).then(res=>{
       var list = res.playlist.tracks;
       // -----------截取100首歌展示------------
       var list = list.splice(0,50);
       list = this._formatSongs(list);
-      console.log(list[0]);
+      console.log("打印列表的第一项：",list[0]);
       this.setPlaylist(list);
     }).catch(e=>{console.log(e)});
 

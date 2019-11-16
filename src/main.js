@@ -10,6 +10,7 @@ import { VERSION } from "./config" //从config导入版本号
 
 
 // 在main.js里导入样式index.html的基础样式
+// 导入less基础样式
 import "@/styles/index.less" //使用了@代表src
 
 // 导入 fastclick.js 优化移动端300ms点击延迟

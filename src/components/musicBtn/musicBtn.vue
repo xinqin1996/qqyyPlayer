@@ -28,7 +28,6 @@ export default {
     display:flex;
     @media (max-width: 767px){
       height:50px;
-      border:1px solid red;      
     }
     @media (max-width:500px){
       justify-content: space-between;

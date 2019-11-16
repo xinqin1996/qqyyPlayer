@@ -7,10 +7,10 @@
 
     <div class="view-fixed">
     <div>这个页面用来做web-view测试{{add}}</div>         
-    <button @click="goHome">返回前一页</button>
+    <button id="dd" @click="goHome">返回前一页</button>
     </div>  
 
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
 
   
 
@@ -43,8 +43,31 @@ export default {
       //       action: '这是一条postMessage'  
       //   }  
       // }); 
+my.setStorage({
+  key: 'currentCity',
+  data: {
+    cityName: '杭州',
+    adCode: '330100',
+    spell: ' hangzhou',
+  },
+  success: function() {
+    my.alert({content: '写入成功'});
+  }
+});
 
-      uni.navigateTo({url: '/pages/demo/time?uname=xinqin'});
+      console.log('12');
+        //  uni.postMessage({
+        //     data: {
+        //         action: 'postMessage'
+        //     }
+        // });  
+
+    // console.log("1234")
+
+    // setTimeout(()=>{
+    //   uni.navigateTo({url: '/pages/demo/index?uname=xinqin'});
+    // },3000)
+      
 
       // 网页向小程序 postMessage 消息
       // my.postMessage({name:"测试web-view"});
